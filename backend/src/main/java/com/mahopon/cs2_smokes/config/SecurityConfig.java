@@ -1,4 +1,4 @@
-package com.mahopon.cs2_smokes;
+package com.mahopon.cs2_smokes.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
