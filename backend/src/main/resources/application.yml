@@ -3,7 +3,7 @@ spring:
     name: cs2-smokes
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/cs2_smokes
+    url: jdbc:postgresql://localhost:5432/cs2_smokes
     username: test
     password: tester
 
