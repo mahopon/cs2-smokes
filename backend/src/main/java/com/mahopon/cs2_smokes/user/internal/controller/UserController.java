@@ -1,19 +1,23 @@
 package com.mahopon.cs2_smokes.user.internal.controller;
 
-import com.mahopon.cs2_smokes.auth.api.util.JwtUtil;
-import com.mahopon.cs2_smokes.user.internal.model.dto.GetProfileResponseDTO;
-import com.mahopon.cs2_smokes.user.internal.model.dto.UpdateProfileRequestDTO;
-import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.mahopon.cs2_smokes.auth.api.util.JwtUtil;
 import com.mahopon.cs2_smokes.user.internal.model.User;
+import com.mahopon.cs2_smokes.user.internal.model.dto.GetProfileResponseDTO;
+import com.mahopon.cs2_smokes.user.internal.model.dto.UpdateProfileRequestDTO;
 import com.mahopon.cs2_smokes.user.internal.service.IUserService;
 
 import jakarta.validation.Valid;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -40,11 +44,12 @@ public class UserController {
     @PutMapping("/")
     public ResponseEntity<Boolean> updateProfile(@RequestHeader("Authorization") String authorizationHeader, @Valid @ModelAttribute UpdateProfileRequestDTO updateProfileDTO) {
         UUID id = jwtUtil.extractId(authorizationHeader);
+        boolean updated = false;
         try {
-            boolean updated = userService.updateUser(id, updateProfileDTO);
+            updated = userService.updateUser(id, updateProfileDTO);
         } catch (RuntimeException e) {
             return ResponseEntity.ok(false);
         }
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(updated);
     }
 }

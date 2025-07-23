@@ -15,5 +15,4 @@ public class StatusController {
     public ResponseEntity<String> status() {
       return ResponseEntity.ok("Server up"); 
     }
-    
 }
