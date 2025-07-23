@@ -1,17 +1,16 @@
 package com.mahopon.cs2_smokes.auth.internal.controller;
 
-import com.mahopon.cs2_smokes.auth.internal.model.dto.LoginDTO;
-import com.mahopon.cs2_smokes.auth.internal.model.dto.RefreshTokenDTO;
-import com.mahopon.cs2_smokes.auth.internal.service.IAuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.security.oauth2.jwt.Jwt;
+import com.mahopon.cs2_smokes.auth.internal.model.dto.LoginDTO;
+import com.mahopon.cs2_smokes.auth.internal.model.dto.RefreshTokenDTO;
+import com.mahopon.cs2_smokes.auth.internal.service.IAuthService;
 
 
 @RestController
@@ -19,7 +18,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 public class AuthController {
     private final IAuthService authService;
 
-    @Autowired
     public AuthController(IAuthService authService) {
         this.authService = authService;
     }

@@ -1,9 +1,8 @@
 package com.mahopon.cs2_smokes.auth.api.service;
 
-import com.mahopon.cs2_smokes.auth.api.model.Auth;
-import com.mahopon.cs2_smokes.auth.internal.model.dto.LoginDTO;
-
 import java.util.UUID;
+
+import com.mahopon.cs2_smokes.auth.api.model.Auth;
 
 public interface IAuthAPI {
     Auth getAuthByEmail(String email);

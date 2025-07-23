@@ -2,7 +2,6 @@ package com.mahopon.cs2_smokes.user.internal.controller;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,6 @@ public class UserController {
     private final IUserService userService;
     private final JwtUtil jwtUtil;
     
-    @Autowired
     public UserController(IUserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -44,7 +42,7 @@ public class UserController {
     @PutMapping("/")
     public ResponseEntity<Boolean> updateProfile(@RequestHeader("Authorization") String authorizationHeader, @Valid @ModelAttribute UpdateProfileRequestDTO updateProfileDTO) {
         UUID id = jwtUtil.extractId(authorizationHeader);
-        boolean updated = false;
+        boolean updated;
         try {
             updated = userService.updateUser(id, updateProfileDTO);
         } catch (RuntimeException e) {

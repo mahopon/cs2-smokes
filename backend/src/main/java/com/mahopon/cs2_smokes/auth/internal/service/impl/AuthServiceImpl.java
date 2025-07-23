@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mahopon.cs2_smokes.auth.api.model.Auth;
@@ -18,7 +17,6 @@ public class AuthServiceImpl implements IAuthService {
     private final AuthRepository authRepository;
     private final JwtUtil jwtUtil;
 
-    @Autowired
     public AuthServiceImpl(AuthRepository authRepository, JwtUtil jwtUtil) {
         this.authRepository = authRepository;
         this.jwtUtil = jwtUtil;

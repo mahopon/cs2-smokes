@@ -1,28 +1,26 @@
 package com.mahopon.cs2_smokes.user.internal.service.impl;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
 import com.mahopon.cs2_smokes.auth.api.model.Auth;
 import com.mahopon.cs2_smokes.auth.api.service.IAuthAPI;
 import com.mahopon.cs2_smokes.auth.api.util.JwtUtil;
 import com.mahopon.cs2_smokes.user.internal.mapper.UserMapping;
-import com.mahopon.cs2_smokes.user.internal.model.dto.UpdateProfileRequestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.mahopon.cs2_smokes.user.internal.model.User;
+import com.mahopon.cs2_smokes.user.internal.model.dto.UpdateProfileRequestDTO;
 import com.mahopon.cs2_smokes.user.internal.repository.UserRepository;
 import com.mahopon.cs2_smokes.user.internal.service.IUserService;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Service("UserService")
 public class UserServiceImpl implements IUserService {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final IAuthAPI authService;
-    private UserMapping userMapping;
+    private final UserMapping userMapping;
 
-    @Autowired
     public UserServiceImpl(UserRepository userRepository, JwtUtil jwtUtil, IAuthAPI authService, UserMapping userMapping) {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
