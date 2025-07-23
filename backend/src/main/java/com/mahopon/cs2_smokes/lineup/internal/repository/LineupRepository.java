@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LineupRepository extends JpaRepository<Lineup, Long> {
-    @Query("SELECT * from lineups where map.id = :mapId")
+    @Query(value = "SELECT  from lineups where map.id = :mapId", nativeQuery = true)
     List<Lineup> findByMap(int mapId);
 }

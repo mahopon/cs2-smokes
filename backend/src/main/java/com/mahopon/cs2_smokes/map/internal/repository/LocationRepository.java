@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
-    @Query("SELECT * from locations WHERE id = :location1Id or id = :location2Id")
+    @Query(value = "SELECT l from locations WHERE id = :location1Id or id = :location2Id", nativeQuery = true)
     List<Location> findTwoLocationIds(long location1Id, long location2Id);
 }
