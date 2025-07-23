@@ -1,40 +1,35 @@
-package com.mahopon.cs2_smokes.user;
+package com.mahopon.cs2_smokes.user.internal.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.mahopon.cs2_smokes.auth.Auth;
+import com.mahopon.cs2_smokes.auth.api.model.Auth;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Table(name = "users")
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
     private UUID id;
-    @Column(nullable=false)
-    private String firstName;
-    @Column(nullable=false)
-    private String lastName;
-    @Column(nullable=false)
-    private String dob;
+    @Column(nullable=true, updatable = true)
+    private String name;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
@@ -45,6 +40,7 @@ public class User {
     private LocalDateTime updatedAt;
     
     @OneToOne(optional=false,fetch=FetchType.EAGER)
+    @MapsId
     @JoinColumn(name="id")
-    private Auth user;
+    private Auth auth;
 }   

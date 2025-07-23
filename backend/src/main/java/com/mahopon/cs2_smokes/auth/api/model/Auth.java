@@ -1,4 +1,4 @@
-package com.mahopon.cs2_smokes.auth;
+package com.mahopon.cs2_smokes.auth.api.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Table(name = "auth", indexes={
     @Index(name = "idx_email", columnList = "email")
@@ -29,8 +30,7 @@ public class Auth {
     private UUID id;
     @Column(nullable=false)
     private String email;
-    @Column(nullable=false)
-    private String hashedPassword;
     private LocalDateTime lastLogin;
+    @UpdateTimestamp
     private LocalDateTime lastUpdate;
 }

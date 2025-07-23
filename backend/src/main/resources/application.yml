@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: cs2-smokes
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/cs2_smokes
+    username: test
+    password: tester
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+
+server:
+  port: 8000
