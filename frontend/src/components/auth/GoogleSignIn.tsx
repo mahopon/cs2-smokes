@@ -19,6 +19,7 @@ const GoogleSignInButton: React.FC<Props> = ({ onLoginSuccess }) => {
           client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
           callback: async (response: google.accounts.id.CredentialResponse) => {
             const idToken = response.credential;
+            console.log(idToken);
             // Send to backend
             const res = await fetch('/api/auth/handle-google-login', {
               method: 'POST',

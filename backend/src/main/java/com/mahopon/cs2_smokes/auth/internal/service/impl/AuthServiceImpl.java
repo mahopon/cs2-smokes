@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mahopon.cs2_smokes.auth.api.model.Auth;
@@ -24,8 +25,9 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public Auth getAuthByEmail(String email) {
-        Optional<Auth> auth = authRepository.findByEmail(email);
-        return auth.get();
+        Optional<Auth> authOpt = authRepository.findByEmail(email);
+        Auth auth = authOpt.orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));
+        return auth;
     }
 
     @Override
@@ -36,13 +38,15 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public LoginDTO loginAuth(String email) {
-        Optional<Auth> auth = Optional.of(getAuthByEmail(email));
-        if (auth.isEmpty()) {
-            auth = Optional.of(createAuth((email)));
-        }
-        auth.get().setLastLogin(LocalDateTime.now());
+        Auth auth = authRepository.findByEmail(email)
+            .orElseGet(() -> createAuth(email));
+
+        auth.setLastLogin(LocalDateTime.now());
+        authRepository.save(auth);
+
+        UUID id = auth.getId();
+
         LoginDTO response = new LoginDTO();
-        UUID id = auth.get().getId();
         response.setId(id);
         response.setAccessToken(jwtUtil.generateAccessToken(id));
         response.setRefreshToken(jwtUtil.generateAccessToken(id));

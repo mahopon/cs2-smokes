@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         'Authorization': `Bearer ${idToken}`  
        },
     });
-
+    console.log(backendResponse);
     const data = await backendResponse.json();
 
     if (!backendResponse.ok) {
@@ -22,6 +22,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error('[GOOGLE LOGIN ERROR]', error);
-    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
+    return NextResponse.json({ error: 'Something went wrong: ' + error }, { status: 500 });
   }
 }

@@ -25,8 +25,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Auth {
-    @GeneratedValue(strategy=GenerationType.UUID)
     @Id
+    @GeneratedValue(strategy=GenerationType.UUID)
     private UUID id;
     @Column(nullable=false)
     private String email;
