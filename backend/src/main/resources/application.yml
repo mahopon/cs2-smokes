@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: cs2-smokes
+
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_URL}:${POSTGRES_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PW}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          DEBUG
+
+server:
+  port: ${SERVER_PORT}

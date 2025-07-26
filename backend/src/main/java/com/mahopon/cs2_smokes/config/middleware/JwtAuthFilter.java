@@ -15,7 +15,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+// Registering as a bean WHILE inheriting OncePerRequestFilter WILL automatically register it as a global route.
+// Can handle this by disabling the bean in a FilterRegistrationBean object, OR by manually handling object creation of the filter
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
