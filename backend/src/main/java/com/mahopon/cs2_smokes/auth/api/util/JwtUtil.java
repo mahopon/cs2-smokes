@@ -1,20 +1,20 @@
 package com.mahopon.cs2_smokes.auth.api.util;
 
-import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.UUID;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Jwts;
 
 @Component
 public class JwtUtil {
 
     private final Key key;
 
-    @Autowired
     public JwtUtil(Key key) {
         this.key = key;
     }

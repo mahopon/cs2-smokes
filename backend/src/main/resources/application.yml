@@ -2,6 +2,9 @@ spring:
   application:
     name: cs2-smokes
 
+  config:
+    import: optional:file:.env[.properties]
+
   profiles:
     active: local
 
